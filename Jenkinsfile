@@ -6,8 +6,7 @@ pipeline {
         }
     }
     environment {
-        DOCKER_HOME = tool('mydocker')
-        DOCKER_HOME_2 = '/home/jenkins'
+        DOCKER_HOME = '/usr/bin/docker'
         PATH = "${DOCKER_HOME}/bin:$PATH"
     }
     stages {
@@ -29,6 +28,7 @@ pipeline {
                 
                 // echo $DOCKER_HOME
                 sh 'printenv'
+                sh 'which docker'
                 
                 script {
                     app = docker.build("saurav/spring-boot-docker-mysql")
