@@ -6,6 +6,10 @@ pipeline {
         }
     }
     stages {
+        stage('Initialize'){
+            def dockerHome = tool 'mydocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
         stage('Build') {
             steps {
                 echo '----------------------------------------------------------'
@@ -45,6 +49,9 @@ pipeline {
     post {
         always {
             echo 'Build completed'
+            
+            // Clean up our workspace.
+            deleteDir()
         }
         success {
             echo 'Successfully!'
