@@ -26,11 +26,11 @@ pipeline {
                 echo '                      Building Image                      '
                 echo '----------------------------------------------------------'
                 
-                echo $DOCKER_HOME
+                // echo $DOCKER_HOME
                 echo $PATH
                 
-                docker {
-                    build '-t saurav/spring-boot-docker-mysql'
+                script {
+                    app = docker.build("saurav/spring-boot-docker-mysql")
                 }
             }
         }
