@@ -27,7 +27,7 @@ pipeline {
                 echo '----------------------------------------------------------'
                 
                 // echo $DOCKER_HOME
-                sh 'echo $PATH'
+                sh 'printenv'
                 
                 script {
                     app = docker.build("saurav/spring-boot-docker-mysql")
