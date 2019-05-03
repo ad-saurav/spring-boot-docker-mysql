@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo '----------------------------------------------------------'
-                echo '                        Building Jar
+                echo '                        Building Jar                      '
                 echo '----------------------------------------------------------'
                 
                 sh 'pwd'
@@ -19,7 +19,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 echo '----------------------------------------------------------'
-                echo '                      Building Image
+                echo '                      Building Image                      '
                 echo '----------------------------------------------------------'
                 
                 app = docker.build("saurav/spring-boot-docker-mysql")
@@ -28,7 +28,7 @@ pipeline {
         stage('Push Image') {
             steps {
                 echo '----------------------------------------------------------'
-                echo '                      Pushing Image
+                echo '                      Pushing Image                       '
                 echo '----------------------------------------------------------'
                 
                 docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
