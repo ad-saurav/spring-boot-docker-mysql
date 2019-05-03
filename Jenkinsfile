@@ -9,11 +9,32 @@ pipeline {
         stage('Build') {
             steps {
                 echo '----------------------------------------------------------'
-                echo '                         Building'
+                echo '                        Building Jar
                 echo '----------------------------------------------------------'
                 
                 sh 'pwd'
                 sh 'mvn clean package docker:build'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                echo '----------------------------------------------------------'
+                echo '                      Building Image
+                echo '----------------------------------------------------------'
+                
+                app = docker.build("saurav/spring-boot-docker-mysql")
+            }
+        }
+        stage('Push Image') {
+            steps {
+                echo '----------------------------------------------------------'
+                echo '                      Pushing Image
+                echo '----------------------------------------------------------'
+                
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    app.push("${BUILD_NUMBER}")
+                    app.push("latest")
+                }
             }
         }
     }
