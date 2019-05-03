@@ -13,7 +13,7 @@ pipeline {
                 echo '----------------------------------------------------------'
                 
                 sh 'pwd'
-                sh 'mvn clean package docker:build'
+                sh 'mvn clean package'
             }
         }
         stage('Build Image') {
