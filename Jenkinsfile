@@ -5,13 +5,11 @@ pipeline {
             args '-v $HOME/.m2:/root/.m2'
         }
     }
+    environment {
+        DOCKER_HOME = tool('mydocker')
+        PATH = "${DOCKER_HOME}/bin:$PATH"
+    }
     stages {
-        stage('Initialize'){
-            steps {
-                def dockerHome = tool 'mydocker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
-        }
         stage('Build') {
             steps {
                 echo '----------------------------------------------------------'
