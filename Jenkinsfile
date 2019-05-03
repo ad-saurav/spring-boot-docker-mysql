@@ -7,6 +7,7 @@ pipeline {
     }
     environment {
         DOCKER_HOME = tool('mydocker')
+        DOCKER_HOME_2 = '/home/jenkins'
         PATH = "${DOCKER_HOME}/bin:$PATH"
     }
     stages {
