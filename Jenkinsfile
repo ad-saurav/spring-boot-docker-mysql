@@ -22,7 +22,9 @@ pipeline {
                 echo '                      Building Image                      '
                 echo '----------------------------------------------------------'
                 
-                app = docker.build("saurav/spring-boot-docker-mysql")
+                script {
+                    app = docker.build("saurav/spring-boot-docker-mysql")
+                }
             }
         }
         stage('Push Image') {
@@ -31,9 +33,11 @@ pipeline {
                 echo '                      Pushing Image                       '
                 echo '----------------------------------------------------------'
                 
-                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                    app.push("${BUILD_NUMBER}")
-                    app.push("latest")
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        app.push("${BUILD_NUMBER}")
+                        app.push("latest")
+                    }
                 }
             }
         }
